@@ -12,7 +12,7 @@ datasource db {
 
 model AcademicSemester {
   id         String    @id @default(uuid())
-  year       Int
+  year       String
   title      String
   code       String
   startMonth String
@@ -24,25 +24,25 @@ model AcademicSemester {
   @@map("academic_semesters")
 }
 
-model AcademicFaculty {
+model academicFaculty {
   id                  String               @id @default(uuid())
   title               String
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
-  academicDepartments AcademicDepartment[]
+  academicDepartments academicDepartment[]
   students            Student[]
   faculties           Faculty[]
 
   @@map("academic_faculty")
 }
 
-model AcademicDepartment {
+model academicDepartment {
   id        String   @id @default(uuid())
   title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
+  academicFaculty   academicFaculty @relation(fields: [academicFacultyId], references: [id])
   academicFacultyId String
   students          Student[]
   faculties         Faculty[]
@@ -58,7 +58,7 @@ model Student {
   middleName   String
   profileImage String
   email        String
-  contactNo    String
+  contactNo    Int
   gender       String
   bloodGroup   String
   createdAt    DateTime @default(now())
@@ -67,10 +67,10 @@ model Student {
   academicSemester   AcademicSemester @relation(fields: [academicSemesterId], references: [id])
   academicSemesterId String
 
-  academicDepartment   AcademicDepartment @relation(fields: [academicDepartmentId], references: [id])
+  academicDepartment   academicDepartment @relation(fields: [academicDepartmentId], references: [id])
   academicDepartmentId String
 
-  academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
+  academicFaculty   academicFaculty @relation(fields: [academicFacultyId], references: [id])
   academicFacultyId String
 
   @@map("students")
@@ -84,17 +84,17 @@ model Faculty {
   middleName   String
   profileImage String
   email        String
-  contactNo    String
+  contactNo    Int
   gender       String
   bloodGroup   String
   designation  String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  academicDepartment   AcademicDepartment @relation(fields: [academicDepartmentId], references: [id])
+  academicDepartment   academicDepartment @relation(fields: [academicDepartmentId], references: [id])
   academicDepartmentId String
 
-  academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
+  academicFaculty   academicFaculty @relation(fields: [academicFacultyId], references: [id])
   academicFacultyId String
 
   @@map("faculties")
