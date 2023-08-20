@@ -54,7 +54,7 @@ model Student {
   id           String   @id @default(uuid())
   studentId    String
   firstName    String
-  lastName     String
+  lastName     String?
   middleName   String
   profileImage String
   email        String
