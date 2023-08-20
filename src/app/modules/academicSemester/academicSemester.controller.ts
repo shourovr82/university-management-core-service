@@ -4,6 +4,10 @@ import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
+import {
+  AcademicSemesterFilterableFields,
+  AcademicSemesterOptionsFields,
+} from './academicSemester.contants';
 import { AcademicSemesterService } from './academicSemester.service';
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
@@ -18,13 +22,13 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
 });
 const getAllSemestersFromDB = catchAsync(
   async (req: Request, res: Response) => {
-    const filters = pick(req.query, ['searchTerm', 'code', 'year']);
-    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+    const filters = pick(req.query, AcademicSemesterFilterableFields);
+    const options = pick(req.query, AcademicSemesterOptionsFields);
 
-    const result = await AcademicSemesterService.getAllSemestersFromDB({
+    const result = await AcademicSemesterService.getAllSemestersFromDB(
       filters,
-      options,
-    });
+      options
+    );
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
