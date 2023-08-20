@@ -34,6 +34,11 @@
             "date": 1692547389188,
             "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-20-08-22-success.log",
             "hash": "049a26910accc027a757510f2ad64733e3c143b0d54d62c608b1bebebe72150e"
+        },
+        {
+            "date": 1692553360186,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-20-08-23-success.log",
+            "hash": "d9a7a0f27bcaac0f9bcc5c97477e3016cbf7df85788e7f4b64515a50a9d71ad9"
         }
     ],
     "hashType": "sha256"
