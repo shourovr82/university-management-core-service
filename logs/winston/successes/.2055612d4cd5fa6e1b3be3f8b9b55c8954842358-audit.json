@@ -64,6 +64,26 @@
             "date": 1692601220601,
             "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-21-08-13-success.log",
             "hash": "6b7aadca7afba62a40f8f9e7cd67845d8489cac296c8a5801d05ea082c4f738b"
+        },
+        {
+            "date": 1692712305730,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-22-08-19-success.log",
+            "hash": "ce0a17ff5a2d8cd3521c79f62bb5929b8a89cde2d46bc19e62f02ea698ad82c4"
+        },
+        {
+            "date": 1692712811638,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-22-08-20-success.log",
+            "hash": "2222a259581ef1335a0b86d0b37ff4876e36070a01fc3cc2b0190c25b83aacc3"
+        },
+        {
+            "date": 1692716718234,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-22-08-21-success.log",
+            "hash": "7e67373ed39c232dee4cd4c57b24499b286d60bc0ce324fe473b28cddd4e5016"
+        },
+        {
+            "date": 1692720017523,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\successes\\phu-2023-22-08-22-success.log",
+            "hash": "4dfda224b958b0fe3d19de533f39d1670a347ca4d80024f08d83db759db6cfa9"
         }
     ],
     "hashType": "sha256"
