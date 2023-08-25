@@ -272,7 +272,7 @@ const assignFaculties = async (
     })),
   });
 
-  const assignFacultiesData = await prisma.courseFaculty.findMany({
+  const facultyData = await prisma.courseFaculty.findMany({
     where: {
       courseId: id,
     },
@@ -280,7 +280,7 @@ const assignFaculties = async (
       faculty: true,
     },
   });
-  return assignFacultiesData;
+  return facultyData;
 };
 
 const removeFaculties = async (
@@ -297,7 +297,7 @@ const removeFaculties = async (
     },
   });
 
-  const assignFacultiesData = await prisma.courseFaculty.findMany({
+  const facultiesData = await prisma.courseFaculty.findMany({
     where: {
       courseId: id,
     },
@@ -305,8 +305,10 @@ const removeFaculties = async (
       faculty: true,
     },
   });
-  return assignFacultiesData;
+  return facultiesData;
 };
+
+// -----------------------------------------
 
 export const CourseService = {
   insertIntoDB,
