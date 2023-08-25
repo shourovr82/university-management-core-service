@@ -84,6 +84,21 @@
             "date": 1692720017533,
             "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-22-08-22-error.log",
             "hash": "081a3608bff3785c8532c2b65039bb4d0b3e9280e73c02affe176ca1d49c49fc"
+        },
+        {
+            "date": 1692772890429,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-23-08-12-error.log",
+            "hash": "defad37ca430795585dc749857ace0ae0123247ae70cc35195a4d6e2d5e82013"
+        },
+        {
+            "date": 1692774128320,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-23-08-13-error.log",
+            "hash": "5d36c904b3ceba05d200d75482a262f6e4e760d7232c66b6951310750008d2b7"
+        },
+        {
+            "date": 1692937848286,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-25-08-10-error.log",
+            "hash": "6b5f2cd08db368c52b88ace95eee9ef2f0611d2e252af017ebb6a13fea03abce"
         }
     ],
     "hashType": "sha256"
