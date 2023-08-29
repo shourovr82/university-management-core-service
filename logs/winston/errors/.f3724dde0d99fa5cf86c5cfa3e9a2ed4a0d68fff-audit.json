@@ -159,6 +159,11 @@
             "date": 1693279048825,
             "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-29-08-09-error.log",
             "hash": "53f62fa8262c79474a50eca40c64935f113023de82e83aa15a0ff35c9b9fb53f"
+        },
+        {
+            "date": 1693282779538,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-29-08-10-error.log",
+            "hash": "1f206ac72043a7bb8e13c7f3a37643bad87e25147c30afc3e7dc730d0ce64d37"
         }
     ],
     "hashType": "sha256"

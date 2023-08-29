@@ -10,17 +10,32 @@ const insertIntoDB = async (
 
   const { academicDepartmentId, semesterRegistrationId, courseIds } = data;
 
-  const result: any[] = [];
+  const result: OfferedCourse[] = [];
 
   await asyncForEach(courseIds, async (courseId: string) => {
-    const insertOfferedCourse = await prisma.offeredCourse.create({
-      data: {
+    const alreadyExist = await prisma.offeredCourse.findFirst({
+      where: {
         academicDepartmentId,
         semesterRegistrationId,
         courseId,
       },
+      include: {
+        academicDepartment: true,
+        course: true,
+        semesterRegistration: true,
+      },
     });
-    result.push(insertOfferedCourse);
+
+    if (!alreadyExist) {
+      const insertOfferedCourse = await prisma.offeredCourse.create({
+        data: {
+          academicDepartmentId,
+          semesterRegistrationId,
+          courseId,
+        },
+      });
+      result.push(insertOfferedCourse);
+    }
   });
   return result;
 };
