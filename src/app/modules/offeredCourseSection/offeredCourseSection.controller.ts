@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { OfferedCourseSectionService } from '../offeredCourseSection/offeredCourseSection.service';
+import { OfferedCourseSectionService } from './offeredCourseSection.service';
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   //
@@ -11,11 +11,11 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Offered Course Created',
+    message: 'Offered Course Section Created',
     data: result,
   });
 });
 
-export const OfferedCourseController = {
+export const OfferedCourseSectionController = {
   insertIntoDB,
 };
