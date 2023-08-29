@@ -47,6 +47,7 @@ model academicDepartment {
   academicFacultyId String
   students          Student[]
   faculties         Faculty[]
+  offeredCourses    OfferedCourse[]
 
   @@map("academic_departments")
 }
@@ -135,6 +136,7 @@ model Course {
   preRequisite    CourseToPrerequisite[] @relation("CourseToPrerequisite")
   preRequisiteFor CourseToPrerequisite[] @relation("preRequisiteToCourse")
   faculties       CourseFaculty[]
+  offeredCourses  OfferedCourse[]
 
   @@map("courses")
 }
@@ -170,8 +172,26 @@ model SemesterRegistration {
   updatedAt          DateTime                    @updatedAt
   academicSemesterId String
   academicSemester   AcademicSemester            @relation(fields: [academicSemesterId], references: [id])
+  offeredCourses     OfferedCourse[]
 
   @@map("semester_registrations")
+}
+
+model OfferedCourse {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+
+  academicDepartmentId String
+  academicDepartment   academicDepartment @relation(fields: [academicDepartmentId], references: [id])
+
+  semesterRegistrationId String
+  semesterRegistration   SemesterRegistration @relation(fields: [semesterRegistrationId], references: [id])
+
+  @@map("offered_courses")
 }
 
 enum SemesterRegistrationStatus {
