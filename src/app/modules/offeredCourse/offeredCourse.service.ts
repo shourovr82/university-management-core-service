@@ -39,7 +39,7 @@ const insertIntoDB = async (
   });
   return result;
 };
-
+//
 export const OfferedCourseService = {
   insertIntoDB,
 };
