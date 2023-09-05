@@ -6,26 +6,6 @@
     "auditLog": "C:\\Level-2\\core-service\\logs\\winston\\errors\\.f3724dde0d99fa5cf86c5cfa3e9a2ed4a0d68fff-audit.json",
     "files": [
         {
-            "date": 1692712305743,
-            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-22-08-19-error.log",
-            "hash": "20aa2b2bae0b7e07607eaccbcaaa51b1a85d6fee57c14c994ead090093ac9029"
-        },
-        {
-            "date": 1692712811690,
-            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-22-08-20-error.log",
-            "hash": "c0bd7d432303d0183471b6312753fc46d1cab1ed7a394e3fca48318f426202f4"
-        },
-        {
-            "date": 1692716718240,
-            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-22-08-21-error.log",
-            "hash": "54a7b6bd023e23831cc584a8eae5759a978ca18bcb56aad07960e5490d4a326c"
-        },
-        {
-            "date": 1692720017533,
-            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-22-08-22-error.log",
-            "hash": "081a3608bff3785c8532c2b65039bb4d0b3e9280e73c02affe176ca1d49c49fc"
-        },
-        {
             "date": 1692772890429,
             "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-23-08-12-error.log",
             "hash": "defad37ca430795585dc749857ace0ae0123247ae70cc35195a4d6e2d5e82013"
@@ -139,6 +119,26 @@
             "date": 1693892954365,
             "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-05-09-11-error.log",
             "hash": "32885d1bce0b9a794a087bd15c5eceea13c15445dd9c49a6089e90e808f2f8db"
+        },
+        {
+            "date": 1693893642422,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-05-09-12-error.log",
+            "hash": "5208dfe3af2fd33413afe763b48384ff08c1f4aa878cc1749446cfc3ec41c5f5"
+        },
+        {
+            "date": 1693924770334,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-05-09-20-error.log",
+            "hash": "efd6c4802c036651ba57cd3da9db77e0908e1c2681b79a2180725dbdbd45daf7"
+        },
+        {
+            "date": 1693927481502,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-05-09-21-error.log",
+            "hash": "839f8511c29d08ead57719a8a0082f7bf30cc87e59935c1f45a872a777c755e6"
+        },
+        {
+            "date": 1693938100795,
+            "name": "C:\\Level-2\\core-service\\logs\\winston\\errors\\phu-2023-06-09-00-error.log",
+            "hash": "e36b2be6fa11bdc97b1fe0286a687ae72a9c7b7b4809b95cf9dabd8d516135de"
         }
     ],
     "hashType": "sha256"
