@@ -276,6 +276,8 @@ model StudentSemesterRegistrationCourse {
   @@map("student_semester_registration_courses")
 }
 
+// enums----------------------
+
 enum SemesterRegistrationStatus {
   UPCOMING
   ONGOING
