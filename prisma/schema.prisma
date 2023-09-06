@@ -17,6 +17,7 @@ model AcademicSemester {
   code                  String
   startMonth            String
   endMonth              String
+  isCurrent             Boolean?               @default(false)
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   students              Student[]
@@ -247,7 +248,7 @@ model OfferedCourseClassSchedule {
 
 model StudentSemesterRegistration {
   id                String   @id @default(uuid())
-  isConfirmd        Boolean? @default(false)
+  isConfirmed       Boolean? @default(false)
   totalCreditsTaken Int?     @default(0)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
