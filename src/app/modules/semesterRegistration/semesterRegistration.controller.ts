@@ -4,7 +4,7 @@ import catchAsync from '../../../shared/catchAsync';
 import pick from '../../../shared/pick';
 import sendResponse from '../../../shared/sendResponse';
 import { semesterRegistrationFilterableFields } from './semesterRegistration.constants';
-import { SemesterRegistrationService } from './semesterRegistration.service';
+import SemesterRegistrationService from './semesterRegistration.service';
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   //
@@ -116,7 +116,39 @@ const withDrawFromCourse = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const confirmMyRegistration = catchAsync(
+  async (req: Request, res: Response) => {
+    //
+    const user = (req as any).user;
 
+    const result = await SemesterRegistrationService.withDrawFromCourse(
+      user.userId,
+      req.body
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Confirmed your registration successfully',
+      data: result,
+    });
+  }
+);
+const getMyRegistration = catchAsync(async (req: Request, res: Response) => {
+  //
+  const user = (req as any).user;
+
+  const result = await SemesterRegistrationService.getMyRegistration(
+    user.userId
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'My Registration Data is fetched Successfully',
+    data: result,
+  });
+});
 export const SemesterRegistrationController = {
   insertIntoDB,
   getAllFromDB,
@@ -126,4 +158,6 @@ export const SemesterRegistrationController = {
   startMyRegistration,
   enrollIntoCourse,
   withDrawFromCourse,
+  confirmMyRegistration,
+  getMyRegistration,
 };
