@@ -1,8 +1,11 @@
 import {
+  Course,
+  OfferedCourse,
   Prisma,
   SemesterRegistration,
   SemesterRegistrationStatus,
   StudentSemesterRegistration,
+  StudentSemesterRegistrationCourse,
 } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
@@ -10,6 +13,7 @@ import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
+import { asyncForEach } from '../../../shared/utils';
 import { StudentSemesterRegistrationCourseService } from '../studentSemesterRegistrationCourse/studentSemesterRegistrationCourse.service';
 import {
   semesterRegistrationRelationalFields,
@@ -401,7 +405,11 @@ const getMyRegistration = async (authUserId: string) => {
   };
 };
 //
-const startNewSemester = async (id: string) => {
+const startNewSemester = async (
+  id: string
+): Promise<{
+  message: string;
+}> => {
   //
   const semesterRegistration = await prisma.semesterRegistration.findUnique({
     where: {
@@ -447,6 +455,72 @@ const startNewSemester = async (id: string) => {
         isCurrent: true,
       },
     });
+    //
+    const studentSemesterRegistrations =
+      await prisma.studentSemesterRegistration.findMany({
+        where: {
+          semesterRegistration: {
+            id,
+          },
+          isConfirmed: true,
+        },
+      });
+    //
+    asyncForEach(
+      studentSemesterRegistrations,
+      async (studentSemReg: StudentSemesterRegistration) => {
+        const studentSemesterRegistrationCourses =
+          await prisma.studentSemesterRegistrationCourse.findMany({
+            where: {
+              semesterRegistration: {
+                id,
+              },
+              student: {
+                id: studentSemReg.studentId,
+              },
+            },
+            include: {
+              offeredCourse: {
+                include: {
+                  course: true,
+                },
+              },
+            },
+          });
+        asyncForEach(
+          studentSemesterRegistrationCourses,
+          async (
+            item: StudentSemesterRegistrationCourse & {
+              offeredCourse: OfferedCourse & {
+                course: Course;
+              };
+            }
+          ) => {
+            //
+            const isExistEnrolledData =
+              await prisma.studentEnrolledCourse.findFirst({
+                where: {
+                  studentId: item.studentId,
+                  courseId: item.offeredCourse.courseId,
+                  academicSemesterId: semesterRegistration.academicSemesterId,
+                },
+              });
+
+            if (!isExistEnrolledData) {
+              const enrolledCourseData = {
+                //
+                studentId: item.studentId,
+                courseId: item.offeredCourse.courseId,
+                academicSemesterId: semesterRegistration.academicSemesterId,
+              };
+              await prisma.studentEnrolledCourse.create({
+                data: enrolledCourseData,
+              });
+            }
+          }
+        );
+      }
+    );
   });
 
   //
