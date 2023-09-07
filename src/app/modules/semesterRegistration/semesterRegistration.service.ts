@@ -359,7 +359,7 @@ const confirmMyRegistration = async (
       id: studentSemesterRegistration.id,
     },
     data: {
-      isConfirmd: true,
+      isConfirmed: true,
     },
   });
 
@@ -424,17 +424,36 @@ const startNewSemester = async (id: string) => {
       'Semester Registration is not ended yet !!'
     );
   }
-
-  const updateStatus = await prisma.academicSemester.update({
-    where: {
-      id: semesterRegistration.academicSemester.id,
-    },
-    data: {
-      isCurrent: true,
-    },
+  //
+  if (semesterRegistration.academicSemester.isCurrent) {
+    //
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Semester is already Started');
+  }
+  await prisma.$transaction(async prismaTransactionClient => {
+    //
+    await prismaTransactionClient.academicSemester.updateMany({
+      where: {
+        isCurrent: true,
+      },
+      data: {
+        isCurrent: false,
+      },
+    });
+    await prisma.academicSemester.update({
+      where: {
+        id: semesterRegistration.academicSemester.id,
+      },
+      data: {
+        isCurrent: true,
+      },
+    });
   });
 
-  return updateStatus;
+  //
+
+  return {
+    message: 'Semester Started Successfully',
+  };
 };
 
 export default {
