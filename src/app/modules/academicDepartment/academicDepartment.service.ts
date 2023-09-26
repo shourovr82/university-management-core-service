@@ -1,18 +1,23 @@
-import { Prisma, academicDepartment } from '@prisma/client';
+import { AcademicDepartment, Prisma } from '@prisma/client';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
+import { RedisClient } from '../../../shared/redis';
 import {
+  EVENT_ACADEMIC_DEPARTMENT_CREATED,
+  EVENT_ACADEMIC_DEPARTMENT_DELETED,
+  EVENT_ACADEMIC_DEPARTMENT_UPDATED,
   academicDepartmentRelationalFields,
   academicDepartmentRelationalFieldsMapper,
   academicDepartmentSearchableFields,
 } from './academicDepartment.constants';
+
 import { IAcademicDepartmentFilterRequest } from './academicDepartment.interface';
 
 const insertIntoDB = async (
-  data: academicDepartment
-): Promise<academicDepartment> => {
+  data: AcademicDepartment
+): Promise<AcademicDepartment> => {
   const result = await prisma.academicDepartment.create({
     data,
     include: {
@@ -20,13 +25,20 @@ const insertIntoDB = async (
     },
   });
 
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_DEPARTMENT_CREATED,
+      JSON.stringify(result)
+    );
+  }
+
   return result;
 };
 
 const getAllFromDB = async (
   filters: IAcademicDepartmentFilterRequest,
   options: IPaginationOptions
-): Promise<IGenericResponse<academicDepartment[]>> => {
+): Promise<IGenericResponse<AcademicDepartment[]>> => {
   const { limit, page, skip } = paginationHelpers.calculatePagination(options);
   const { searchTerm, ...filterData } = filters;
 
@@ -63,7 +75,7 @@ const getAllFromDB = async (
     });
   }
 
-  const whereConditions: Prisma.academicDepartmentWhereInput =
+  const whereConditions: Prisma.AcademicDepartmentWhereInput =
     andConditions.length > 0 ? { AND: andConditions } : {};
 
   const result = await prisma.academicDepartment.findMany({
@@ -96,7 +108,7 @@ const getAllFromDB = async (
 
 const getByIdFromDB = async (
   id: string
-): Promise<academicDepartment | null> => {
+): Promise<AcademicDepartment | null> => {
   const result = await prisma.academicDepartment.findUnique({
     where: {
       id,
@@ -107,10 +119,11 @@ const getByIdFromDB = async (
   });
   return result;
 };
+
 const updateOneInDB = async (
   id: string,
-  payload: Partial<academicDepartment>
-): Promise<academicDepartment> => {
+  payload: Partial<AcademicDepartment>
+): Promise<AcademicDepartment> => {
   const result = await prisma.academicDepartment.update({
     where: {
       id,
@@ -120,9 +133,16 @@ const updateOneInDB = async (
       academicFaculty: true,
     },
   });
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_DEPARTMENT_UPDATED,
+      JSON.stringify(result)
+    );
+  }
   return result;
 };
-const deleteByIdFromDB = async (id: string): Promise<academicDepartment> => {
+
+const deleteByIdFromDB = async (id: string): Promise<AcademicDepartment> => {
   const result = await prisma.academicDepartment.delete({
     where: {
       id,
@@ -131,8 +151,15 @@ const deleteByIdFromDB = async (id: string): Promise<academicDepartment> => {
       academicFaculty: true,
     },
   });
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_DEPARTMENT_DELETED,
+      JSON.stringify(result)
+    );
+  }
   return result;
 };
+
 export const AcademicDepartmentService = {
   insertIntoDB,
   getAllFromDB,

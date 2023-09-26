@@ -13,8 +13,10 @@ router.get('/:id', AcademicDepartmentController.getByIdFromDB);
 router.post(
   '/',
   validateRequest(AcademicDepartmentValidation.create),
+  auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   AcademicDepartmentController.insertIntoDB
 );
+
 router.patch(
   '/:id',
   validateRequest(AcademicDepartmentValidation.update),

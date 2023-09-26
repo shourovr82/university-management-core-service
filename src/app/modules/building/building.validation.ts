@@ -3,10 +3,11 @@ import { z } from 'zod';
 const create = z.object({
   body: z.object({
     title: z.string({
-      required_error: 'Title is Required',
+      required_error: 'Title is required',
     }),
   }),
 });
+
 const update = z.object({
   body: z.object({
     title: z.string({
@@ -15,7 +16,7 @@ const update = z.object({
   }),
 });
 
-export const BuildingValidation = {
+export const BuildingValidations = {
   create,
   update,
 };
